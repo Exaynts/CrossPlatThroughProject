@@ -1,20 +1,24 @@
 QT       += core gui widgets
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
 CONFIG   += console c++17
 CONFIG   -= app_bundle
 
-TARGET = QtCalculatorProject
+TARGET = QtNutritionDiary
 TEMPLATE = app
 
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    meal.cpp \
+    nutritiondiary.cpp \
+    mealwidget.cpp \
     calculator.cpp
 
 HEADERS += \
     mainwindow.h \
+    meal.h \
+    nutritiondiary.h \
+    mealwidget.h \
     calculator.h
 
 FORMS += \

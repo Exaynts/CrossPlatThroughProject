@@ -1,23 +1,46 @@
 #include "mainwindow.h"
+#include "mealwidget.h"
+#include "meal.h"
 #include <QDebug>
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QLineEdit>
 #include <QLabel>
 #include <QPushButton>
+#include <QSpinBox>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <QScrollArea>
+#include <QCloseEvent>
+#include <QFileDialog>
+#include <QHBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , m_calculator(new Calculator(this)) // Calculator — ребенок окна!
+    , m_diary(new NutritionDiary(this))
 {
+    // Создаём базовые 3 приёма пищи — они могут быть перезаписаны загрузкой
+    m_diary->addMeal("Завтрак");
+    m_diary->addMeal("Обед");
+    m_diary->addMeal("Ужин");
+
     setupUi();
 
-    // Связываем сигналы калькулятора со слотами окна
-    connect(m_calculator, &Calculator::resultReady,
-            this, &MainWindow::onResultReady);
-    connect(m_calculator, &Calculator::errorOccurred,
-            this, &MainWindow::onErrorOccurred);
+    connect(m_diary, &NutritionDiary::dailyTotalChanged,
+            this, &MainWindow::onDailyTotalChanged);
+    connect(m_diary, &NutritionDiary::normStatusChanged,
+            this, &MainWindow::onNormStatusChanged);
+    connect(m_diary, &NutritionDiary::mealAdded,
+            this, &MainWindow::onMealAdded);
+    connect(m_diary, &NutritionDiary::mealRemoved,
+            this, &MainWindow::onMealRemoved);
+
+    // Первичное обновление
+    onDailyTotalChanged(m_diary->dailyTotal());
+    onNormStatusChanged(m_diary->normStatus(), m_diary->dailyTotal());
+
+    // Автозагрузка: если файл есть — перезапишет приёмы пищи
+    m_diary->loadFromFile();
 
     qDebug() << "[CREATE] MainWindow";
 }
@@ -29,99 +52,231 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupUi()
 {
-    setWindowTitle("Сквозной проект: Qt Калькулятор");
-    resize(400, 300);
+    setWindowTitle("Дневник питания");
+    resize(550, 750);
 
-    // Центральный виджет (родитель для всех элементов)
-    QWidget *centralWidget = new QWidget(this);
-    setCentralWidget(centralWidget);
+    QScrollArea *scroll = new QScrollArea(this);
+    scroll->setWidgetResizable(true);
+    setCentralWidget(scroll);
 
-    QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
+    QWidget *central = new QWidget(scroll);
+    scroll->setWidget(central);
 
-    // Поля ввода
-    QHBoxLayout *inputLayout = new QHBoxLayout();
-    m_inputA = new QLineEdit(centralWidget);
-    m_inputA->setPlaceholderText("Число A");
-    m_inputB = new QLineEdit(centralWidget);
-    m_inputB->setPlaceholderText("Число B");
-    inputLayout->addWidget(m_inputA.data());
-    inputLayout->addWidget(m_inputB.data());
-    mainLayout->addLayout(inputLayout);
+    QVBoxLayout *mainLayout = new QVBoxLayout(central);
 
-    // Кнопки операций
-    QHBoxLayout *buttonLayout = new QHBoxLayout();
-    m_addButton = new QPushButton("+", centralWidget);
-    m_subButton = new QPushButton("-", centralWidget);
-    m_mulButton = new QPushButton("*", centralWidget);
-    m_divButton = new QPushButton("/", centralWidget);
-    buttonLayout->addWidget(m_addButton.data());
-    buttonLayout->addWidget(m_subButton.data());
-    buttonLayout->addWidget(m_mulButton.data());
-    buttonLayout->addWidget(m_divButton.data());
-    mainLayout->addLayout(buttonLayout);
+    // Заголовок
+    QLabel *title = new QLabel("Дневник питания", central);
+    title->setAlignment(Qt::AlignCenter);
+    QFont f = title->font();
+    f.setBold(true);
+    f.setPointSize(14);
+    title->setFont(f);
+    mainLayout->addWidget(title);
 
-    // Кнопка сброса
-    m_resetButton = new QPushButton("Сброс", centralWidget);
-    mainLayout->addWidget(m_resetButton.data());
+    // Нормы: от и до
+    QHBoxLayout *normLayout = new QHBoxLayout();
+    normLayout->addWidget(new QLabel("Норма от:", central));
+    m_minNormSpin = new QSpinBox(central);
+    m_minNormSpin->setRange(0, 10000);
+    m_minNormSpin->setValue(static_cast<int>(m_diary->minNorm()));
+    m_minNormSpin->setSuffix(" ккал");
+    normLayout->addWidget(m_minNormSpin.data());
 
-    // Метка результата
-    m_resultLabel = new QLabel("Результат: 0", centralWidget);
-    m_resultLabel->setAlignment(Qt::AlignCenter);
-    mainLayout->addWidget(m_resultLabel.data());
+    normLayout->addWidget(new QLabel("до:", central));
+    m_maxNormSpin = new QSpinBox(central);
+    m_maxNormSpin->setRange(0, 10000);
+    m_maxNormSpin->setValue(static_cast<int>(m_diary->maxNorm()));
+    m_maxNormSpin->setSuffix(" ккал");
+    normLayout->addWidget(m_maxNormSpin.data());
+    normLayout->addStretch();
+    mainLayout->addLayout(normLayout);
 
-    // Соединения кнопок со слотами
-    connect(m_addButton.data(), &QPushButton::clicked, this, &MainWindow::onAddClicked);
-    connect(m_subButton.data(), &QPushButton::clicked, this, &MainWindow::onSubClicked);
-    connect(m_mulButton.data(), &QPushButton::clicked, this, &MainWindow::onMulClicked);
-    connect(m_divButton.data(), &QPushButton::clicked, this, &MainWindow::onDivClicked);
-    connect(m_resetButton.data(), &QPushButton::clicked, this, &MainWindow::onResetClicked);
+    // Статусная строка
+    m_statusLabel = new QLabel("", central);
+    m_statusLabel->setAlignment(Qt::AlignCenter);
+    m_statusLabel->setWordWrap(true);
+    mainLayout->addWidget(m_statusLabel.data());
+
+    // Контейнер для динамически добавляемых приёмов пищи
+    m_mealsLayout = new QVBoxLayout();
+    mainLayout->addLayout(m_mealsLayout.data());
+
+    // Кнопка добавления приёма пищи
+    QPushButton *addMealBtn = new QPushButton("+ Добавить приём пищи", central);
+    connect(addMealBtn, &QPushButton::clicked,
+            this, &MainWindow::onAddMealClicked);
+    mainLayout->addWidget(addMealBtn);
+
+    // Итог за день
+    m_totalLabel = new QLabel("Итого за день: 0 ккал", central);
+    m_totalLabel->setAlignment(Qt::AlignCenter);
+    QFont tf = m_totalLabel->font();
+    tf.setBold(true);
+    tf.setPointSize(12);
+    m_totalLabel->setFont(tf);
+    mainLayout->addWidget(m_totalLabel.data());
+
+    // Сбросить день
+    QPushButton *resetBtn = new QPushButton("Сбросить день", central);
+    connect(resetBtn, &QPushButton::clicked, this, &MainWindow::onResetDay);
+    mainLayout->addWidget(resetBtn);
+
+    mainLayout->addStretch();
+
+    // Кнопки сохранения/загрузки
+    QHBoxLayout *fileLayout = new QHBoxLayout();
+    QPushButton *saveBtn = new QPushButton("💾 Сохранить", central);
+    QPushButton *loadBtn = new QPushButton("📂 Загрузить", central);
+    connect(saveBtn, &QPushButton::clicked, this, &MainWindow::onSaveClicked);
+    connect(loadBtn, &QPushButton::clicked, this, &MainWindow::onLoadClicked);
+    fileLayout->addWidget(saveBtn);
+    fileLayout->addWidget(loadBtn);
+    mainLayout->addLayout(fileLayout);
+
+    // Строка статуса файла
+    m_fileStatusLabel = new QLabel("", central);
+    m_fileStatusLabel->setAlignment(Qt::AlignCenter);
+    m_fileStatusLabel->setStyleSheet("color: gray; font-size: 10px;");
+    mainLayout->addWidget(m_fileStatusLabel.data());
+
+    // Связки норм
+    connect(m_minNormSpin.data(), QOverload<int>::of(&QSpinBox::valueChanged),
+            this, &MainWindow::onMinNormChanged);
+    connect(m_maxNormSpin.data(), QOverload<int>::of(&QSpinBox::valueChanged),
+            this, &MainWindow::onMaxNormChanged);
 }
 
-void MainWindow::onAddClicked()
+void MainWindow::addMealWidget(Meal *meal)
 {
-    bool ok1, ok2;
-    double a = m_inputA->text().toDouble(&ok1);
-    double b = m_inputB->text().toDouble(&ok2);
-    if (ok1 && ok2) m_calculator->add(a, b);
+    MealWidget *w = new MealWidget(meal, this);
+    connect(w, &MealWidget::deleteMealRequested,
+            this, &MainWindow::onDeleteMealRequested);
+    m_mealWidgets.append(w);
+    m_mealsLayout->addWidget(w);
 }
 
-void MainWindow::onSubClicked()
+void MainWindow::onMealAdded(Meal *meal)
 {
-    bool ok1, ok2;
-    double a = m_inputA->text().toDouble(&ok1);
-    double b = m_inputB->text().toDouble(&ok2);
-    if (ok1 && ok2) m_calculator->subtract(a, b);
+    addMealWidget(meal);
 }
 
-void MainWindow::onMulClicked()
+void MainWindow::onAddMealClicked()
 {
-    bool ok1, ok2;
-    double a = m_inputA->text().toDouble(&ok1);
-    double b = m_inputB->text().toDouble(&ok2);
-    if (ok1 && ok2) m_calculator->multiply(a, b);
+    bool ok = false;
+    QString name = QInputDialog::getText(this, "Новый приём пищи",
+                                         "Название приёма пищи:", QLineEdit::Normal,
+                                         QString("Приём пищи %1").arg(m_diary->mealCount() + 1), &ok);
+    if (ok && !name.isEmpty()) {
+        m_diary->addMeal(name);
+    }
 }
 
-void MainWindow::onDivClicked()
+void MainWindow::onDeleteMealRequested(MealWidget *widget)
 {
-    bool ok1, ok2;
-    double a = m_inputA->text().toDouble(&ok1);
-    double b = m_inputB->text().toDouble(&ok2);
-    if (ok1 && ok2) m_calculator->divide(a, b);
+    Meal *meal = widget->meal();
+    m_mealWidgets.removeAll(widget);
+    widget->deleteLater();
+    m_diary->removeMeal(meal);
 }
 
-void MainWindow::onResetClicked()
+void MainWindow::onResetDay()
 {
-    m_calculator->reset();
-    m_inputA->clear();
-    m_inputB->clear();
+    auto answer = QMessageBox::question(this, "Сброс дня",
+                                        "Сбросить все данные за день?",
+                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    if (answer == QMessageBox::Yes) {
+        m_diary->resetDay();
+    }
 }
 
-void MainWindow::onResultReady(double result)
+void MainWindow::onMinNormChanged(int value)
 {
-    m_resultLabel->setText(QString("Результат: %1").arg(result, 0, 'f', 4));
+    // Нижняя граница не может быть выше верхней
+    if (value > m_maxNormSpin->value()) {
+        m_maxNormSpin->setValue(value);
+    }
+    m_diary->setMinNorm(value);
 }
 
-void MainWindow::onErrorOccurred(const QString &message)
+void MainWindow::onMaxNormChanged(int value)
 {
-    m_resultLabel->setText("Ошибка: " + message);
+    // Верхняя граница не может быть ниже нижней
+    if (value < m_minNormSpin->value()) {
+        m_minNormSpin->setValue(value);
+    }
+    m_diary->setMaxNorm(value);
+}
+
+void MainWindow::onDailyTotalChanged(double total)
+{
+    m_totalLabel->setText(QString("Итого за день: %1 ккал").arg(total));
+}
+
+void MainWindow::onNormStatusChanged(NutritionDiary::NormStatus status, double total)
+{
+    double minN = m_diary->minNorm();
+    double maxN = m_diary->maxNorm();
+
+    switch (status) {
+    case NutritionDiary::BelowNorm:
+        m_statusLabel->setText(QString("⚠ Недобор: %1 ккал (норма от %2 до %3)")
+                                   .arg(minN - total, 0, 'f', 0).arg(minN, 0, 'f', 0).arg(maxN, 0, 'f', 0));
+        m_statusLabel->setStyleSheet("color: orange; font-weight: bold;");
+        break;
+    case NutritionDiary::InRange:
+        m_statusLabel->setText(QString("✓ В пределах нормы (%1 – %2 ккал)")
+                                   .arg(minN, 0, 'f', 0).arg(maxN, 0, 'f', 0));
+        m_statusLabel->setStyleSheet("color: green; font-weight: bold;");
+        break;
+    case NutritionDiary::AboveNorm:
+        m_statusLabel->setText(QString("⚠ Перебор: %1 ккал (норма от %2 до %3)")
+                                   .arg(total - maxN, 0, 'f', 0).arg(minN, 0, 'f', 0).arg(maxN, 0, 'f', 0));
+        m_statusLabel->setStyleSheet("color: red; font-weight: bold;");
+        break;
+    }
+}
+
+void MainWindow::onMealRemoved(Meal *meal)
+{
+    // Находим виджет, соответствующий этому приёму пищи, и удаляем
+    for (int i = 0; i < m_mealWidgets.size(); ++i) {
+        if (m_mealWidgets[i]->meal() == meal) {
+            MealWidget *w = m_mealWidgets.takeAt(i);
+            w->deleteLater();
+            break;
+        }
+    }
+}
+
+void MainWindow::onSaveClicked()
+{
+    if (m_diary->saveToFile()) {
+        m_fileStatusLabel->setText("Сохранено: " + QFileInfo(NutritionDiary::defaultFilePath()).fileName());
+    } else {
+        m_fileStatusLabel->setText("Ошибка сохранения!");
+        QMessageBox::warning(this, "Ошибка", "Не удалось сохранить данные.");
+    }
+}
+
+void MainWindow::onLoadClicked()
+{
+    auto answer = QMessageBox::question(this, "Загрузка",
+                                        "Текущие данные будут заменены данными из файла. Продолжить?",
+                                        QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    if (answer != QMessageBox::Yes) return;
+
+    if (m_diary->loadFromFile()) {
+        m_fileStatusLabel->setText("Загружено: " + QFileInfo(NutritionDiary::defaultFilePath()).fileName());
+    } else {
+        m_fileStatusLabel->setText("Файл не найден или повреждён.");
+        QMessageBox::warning(this, "Ошибка", "Не удалось загрузить данные.");
+    }
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    // Автосохранение при закрытии окна
+    m_diary->saveToFile();
+    qDebug() << "[APP] Данные сохранены перед закрытием";
+    event->accept();
 }

@@ -3,11 +3,14 @@
 
 #include <QMainWindow>
 #include <QPointer>
-#include "calculator.h"
+#include <QList>
+#include "nutritiondiary.h"
 
-class QLineEdit;
+class QVBoxLayout;
 class QLabel;
-class QPushButton;
+class QSpinBox;
+class MealWidget;
+class Meal;
 
 class MainWindow : public QMainWindow
 {
@@ -17,30 +20,35 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
+protected:
+    void closeEvent(QCloseEvent *event) override;
+
 private slots:
-    void onAddClicked();
-    void onSubClicked();
-    void onMulClicked();
-    void onDivClicked();
-    void onResetClicked();
-    void onResultReady(double result);
-    void onErrorOccurred(const QString &message);
+    void onAddMealClicked();
+    void onResetDay();
+    void onMinNormChanged(int value);
+    void onMaxNormChanged(int value);
+    void onDailyTotalChanged(double total);
+    void onNormStatusChanged(NutritionDiary::NormStatus status, double total);
+    void onDeleteMealRequested(MealWidget *widget);
+    void onMealAdded(Meal *meal);
+    void onMealRemoved(Meal *meal);
+    void onSaveClicked();
+    void onLoadClicked();
 
 private:
     void setupUi();
+    void addMealWidget(Meal *meal);
+    void clearMealWidgets();
 
-    // Бизнес-логика
-    Calculator *m_calculator;
-
-    // GUI-элементы (все с родителями!)
-    QPointer<QLineEdit> m_inputA;
-    QPointer<QLineEdit> m_inputB;
-    QPointer<QLabel> m_resultLabel;
-    QPointer<QPushButton> m_addButton;
-    QPointer<QPushButton> m_subButton;
-    QPointer<QPushButton> m_mulButton;
-    QPointer<QPushButton> m_divButton;
-    QPointer<QPushButton> m_resetButton;
+    NutritionDiary *m_diary;
+    QPointer<QVBoxLayout> m_mealsLayout;
+    QList<MealWidget*> m_mealWidgets;
+    QPointer<QLabel> m_statusLabel;
+    QPointer<QLabel> m_totalLabel;
+    QPointer<QSpinBox> m_minNormSpin;
+    QPointer<QSpinBox> m_maxNormSpin;
+    QPointer<QLabel> m_fileStatusLabel;
 };
 
 #endif // MAINWINDOW_H
