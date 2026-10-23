@@ -4,13 +4,16 @@
 #include <QMainWindow>
 #include <QPointer>
 #include <QList>
+#include <QTimer>
 #include "nutritiondiary.h"
 
 class QVBoxLayout;
 class QLabel;
-class QSpinBox;
+class QSpinBox; // Оставляем, так как QSpinBox используется в MealWidget, но здесь можно удалить
 class MealWidget;
 class Meal;
+class NormWidget;
+class FileControlWidget;
 
 class MainWindow : public QMainWindow
 {
@@ -26,8 +29,6 @@ protected:
 private slots:
     void onAddMealClicked();
     void onResetDay();
-    void onMinNormChanged(int value);
-    void onMaxNormChanged(int value);
     void onDailyTotalChanged(double total);
     void onNormStatusChanged(NutritionDiary::NormStatus status, double total);
     void onDeleteMealRequested(MealWidget *widget);
@@ -39,16 +40,19 @@ private slots:
 private:
     void setupUi();
     void addMealWidget(Meal *meal);
-    void clearMealWidgets();
 
     NutritionDiary *m_diary;
+    QTimer *m_autoSaveTimer;
+
     QPointer<QVBoxLayout> m_mealsLayout;
     QList<MealWidget*> m_mealWidgets;
-    QPointer<QLabel> m_statusLabel;
-    QPointer<QLabel> m_totalLabel;
-    QPointer<QSpinBox> m_minNormSpin;
-    QPointer<QSpinBox> m_maxNormSpin;
-    QPointer<QLabel> m_fileStatusLabel;
+
+    QPointer<QLabel> m_statusLabel; // Это глобальная строка статуса (недобор/перебор)
+    QPointer<QLabel> m_totalLabel;  // Итог за день
+
+    // Новые компоненты
+    QPointer<NormWidget> m_normWidget;
+    QPointer<FileControlWidget> m_fileWidget;
 };
 
 #endif // MAINWINDOW_H

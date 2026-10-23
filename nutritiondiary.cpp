@@ -1,10 +1,3 @@
-#include <QFile>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
-#include <QStandardPaths>
-#include <QDir>
-#include <QDebug>
 #include "nutritiondiary.h"
 #include <QDebug>
 
@@ -97,115 +90,6 @@ void NutritionDiary::resetDay()
     updateStatus();
 }
 
-void NutritionDiary::updateStatus()
-{
-    emit normStatusChanged(normStatus(), dailyTotal());
-}
-
-QString NutritionDiary::defaultFilePath()
-{
-    // Файл diary.json будет лежать рядом с исполняемым файлом
-    return QDir::currentPath() + "/diary.json";
-}
-
-QJsonObject NutritionDiary::toJson() const
-{
-    QJsonObject root;
-    root["minNorm"] = m_minNorm;
-    root["maxNorm"] = m_maxNorm;
-
-    QJsonArray mealsArr;
-    for (Meal *meal : m_meals) {
-        QJsonObject mealObj;
-        mealObj["name"] = meal->name();
-
-        QJsonArray dishesArr;
-        for (const auto &dish : meal->dishes()) {
-            QJsonObject dishObj;
-            dishObj["name"] = dish.first;
-            dishObj["calories"] = dish.second;
-            dishesArr.append(dishObj);
-        }
-        mealObj["dishes"] = dishesArr;
-        mealsArr.append(mealObj);
-    }
-    root["meals"] = mealsArr;
-    return root;
-}
-
-void NutritionDiary::fromJson(const QJsonObject &obj)
-{
-    // 1. Очищаем старые данные
-    clearAllMeals();
-
-    // 2. Нормы
-    if (obj.contains("minNorm"))
-        setMinNorm(obj["minNorm"].toDouble(1500.0));
-    if (obj.contains("maxNorm"))
-        setMaxNorm(obj["maxNorm"].toDouble(2500.0));
-
-    // 3. Приёмы пищи и блюда
-    QJsonArray mealsArr = obj["meals"].toArray();
-    for (const QJsonValue &mealVal : mealsArr) {
-        QJsonObject mealObj = mealVal.toObject();
-        QString mealName = mealObj["name"].toString("Приём пищи");
-        Meal *meal = addMeal(mealName);
-
-        QJsonArray dishesArr = mealObj["dishes"].toArray();
-        for (const QJsonValue &dishVal : dishesArr) {
-            QJsonObject dishObj = dishVal.toObject();
-            meal->addDish(dishObj["name"].toString(),
-                          dishObj["calories"].toDouble());
-        }
-    }
-}
-
-bool NutritionDiary::saveToFile(const QString &filePath) const
-{
-    QString path = filePath.isEmpty() ? defaultFilePath() : filePath;
-    QFile file(path);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qWarning() << "[DIARY] Не удалось открыть файл для записи:" << path;
-        return false;
-    }
-
-    QJsonDocument doc(toJson());
-    file.write(doc.toJson(QJsonDocument::Indented));
-    file.close();
-
-    qDebug() << "[DIARY] Сохранено в" << path;
-    return true;
-}
-
-bool NutritionDiary::loadFromFile(const QString &filePath)
-{
-    QString path = filePath.isEmpty() ? defaultFilePath() : filePath;
-    QFile file(path);
-    if (!file.exists()) {
-        qDebug() << "[DIARY] Файл не найден, пропускаем загрузку:" << path;
-        return false;
-    }
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qWarning() << "[DIARY] Не удалось открыть файл для чтения:" << path;
-        return false;
-    }
-
-    QByteArray data = file.readAll();
-    file.close();
-
-    QJsonParseError err;
-    QJsonDocument doc = QJsonDocument::fromJson(data, &err);
-    if (err.error != QJsonParseError::NoError) {
-        qWarning() << "[DIARY] Ошибка парсинга JSON:" << err.errorString();
-        return false;
-    }
-
-    fromJson(doc.object());
-    emit diaryLoaded();
-    qDebug() << "[DIARY] Загружено из" << path;
-    return true;
-}
-
 void NutritionDiary::clearAllMeals()
 {
     // Удаляем в обратном порядке, чтобы не сбить индексы
@@ -216,4 +100,9 @@ void NutritionDiary::clearAllMeals()
     }
     emit dailyTotalChanged(0);
     updateStatus();
+}
+
+void NutritionDiary::updateStatus()
+{
+    emit normStatusChanged(normStatus(), dailyTotal());
 }
