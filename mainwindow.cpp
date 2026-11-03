@@ -1,17 +1,14 @@
 #include "mainwindow.h"
-#include "mealwidget.h"
-#include "meal.h"
 #include "normwidget.h"
 #include "filecontrolwidget.h"
-#include "diarystorage.h" // Подключаем наш новый класс Storage
+#include "diarysummarywidget.h"
+#include "mealscontainerwidget.h"
+#include "diarystorage.h"
 #include <QDebug>
 #include <QWidget>
 #include <QVBoxLayout>
-#include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
-#include <QSpinBox>
-#include <QInputDialog>
 #include <QMessageBox>
 #include <QScrollArea>
 #include <QCloseEvent>
@@ -29,38 +26,36 @@ MainWindow::MainWindow(QWidget *parent)
 
     setupUi();
 
-    // Связываем бизнес-логику с UI
-    connect(m_diary, &NutritionDiary::dailyTotalChanged,
-            this, &MainWindow::onDailyTotalChanged);
-    connect(m_diary, &NutritionDiary::normStatusChanged,
-            this, &MainWindow::onNormStatusChanged);
-    connect(m_diary, &NutritionDiary::mealAdded,
-            this, &MainWindow::onMealAdded);
-    connect(m_diary, &NutritionDiary::mealRemoved,
-            this, &MainWindow::onMealRemoved);
+    // --- СВЯЗЫВАНИЕ КОМПОНЕНТОВ ---
 
-    // Связываем NormWidget с бизнес-логикой
+    // Нормы -> Модель
     connect(m_normWidget, &NormWidget::minNormChanged, m_diary, &NutritionDiary::setMinNorm);
     connect(m_normWidget, &NormWidget::maxNormChanged, m_diary, &NutritionDiary::setMaxNorm);
 
-    // Связываем FileControlWidget с MainWindow
+    // Модель -> Панель итогов
+    connect(m_diary, &NutritionDiary::dailyTotalChanged, m_summaryWidget, &DiarySummaryWidget::updateTotal);
+    connect(m_diary, &NutritionDiary::normStatusChanged, this, [this](NutritionDiary::NormStatus st, double total) {
+        m_summaryWidget->updateStatus(st, total, m_diary->minNorm(), m_diary->maxNorm());
+    });
+
+    // Файловые операции
     connect(m_fileWidget, &FileControlWidget::saveRequested, this, &MainWindow::onSaveClicked);
     connect(m_fileWidget, &FileControlWidget::loadRequested, this, &MainWindow::onLoadClicked);
 
     // Первичное обновление интерфейса
-    onDailyTotalChanged(m_diary->dailyTotal());
-    onNormStatusChanged(m_diary->normStatus(), m_diary->dailyTotal());
+    m_summaryWidget->updateTotal(m_diary->dailyTotal());
+    m_summaryWidget->updateStatus(m_diary->normStatus(), m_diary->dailyTotal(), m_diary->minNorm(), m_diary->maxNorm());
 
     // Автозагрузка
     DiaryStorage::load(*m_diary);
 
-    // Таймер автосохранения
+    // --- ТАЙМЕР АВТОСОХРАНЕНИЯ ---
     m_autoSaveTimer = new QTimer(this);
     m_autoSaveTimer->setInterval(60000);
     connect(m_autoSaveTimer, &QTimer::timeout, this, [this]() {
         if (DiaryStorage::save(*m_diary)) {
             QString timeStr = QTime::currentTime().toString("hh:mm:ss");
-            qDebug() << "[AUTO-SAVE] Данные автоматически сохранены в" << timeStr;
+            qDebug() << "[AUTO-SAVE] Данные сохранены в" << timeStr;
             if (m_fileWidget) {
                 m_fileWidget->setStatus("Автосохранение выполнено: " + timeStr);
             }
@@ -90,7 +85,7 @@ void MainWindow::setupUi()
 
     QVBoxLayout *mainLayout = new QVBoxLayout(central);
 
-    // Заголовок
+    // 1. Заголовок
     QLabel *title = new QLabel("Дневник питания", central);
     title->setAlignment(Qt::AlignCenter);
     QFont f = title->font();
@@ -99,86 +94,29 @@ void MainWindow::setupUi()
     title->setFont(f);
     mainLayout->addWidget(title);
 
-    // 1. Панель норм (новый класс)
+    // 2. Панель норм
     m_normWidget = new NormWidget(static_cast<int>(m_diary->minNorm()),
                                   static_cast<int>(m_diary->maxNorm()), central);
     mainLayout->addWidget(m_normWidget);
 
-    // Статусная строка (глобальная)
-    m_statusLabel = new QLabel("", central);
-    m_statusLabel->setAlignment(Qt::AlignCenter);
-    m_statusLabel->setWordWrap(true);
-    mainLayout->addWidget(m_statusLabel);
+    // 3. Панель итогов (статус + общая сумма)
+    m_summaryWidget = new DiarySummaryWidget(central);
+    mainLayout->addWidget(m_summaryWidget);
 
-    // Контейнер для приёмов пищи
-    m_mealsLayout = new QVBoxLayout();
-    mainLayout->addLayout(m_mealsLayout);
+    // 4. Список приемов пищи (включая кнопку "+ Добавить")
+    m_mealsWidget = new MealsContainerWidget(m_diary, central);
+    mainLayout->addWidget(m_mealsWidget);
 
-    // Кнопка добавления приёма пищи
-    QPushButton *addMealBtn = new QPushButton("+ Добавить приём пищи", central);
-    connect(addMealBtn, &QPushButton::clicked, this, &MainWindow::onAddMealClicked);
-    mainLayout->addWidget(addMealBtn);
-
-    // Итог за день
-    m_totalLabel = new QLabel("Итого за день: 0 ккал", central);
-    m_totalLabel->setAlignment(Qt::AlignCenter);
-    QFont tf = m_totalLabel->font();
-    tf.setBold(true);
-    tf.setPointSize(12);
-    m_totalLabel->setFont(tf);
-    mainLayout->addWidget(m_totalLabel);
-
-    // Сбросить день
+    // 5. Кнопка сброса
     QPushButton *resetBtn = new QPushButton("Сбросить день", central);
     connect(resetBtn, &QPushButton::clicked, this, &MainWindow::onResetDay);
     mainLayout->addWidget(resetBtn);
 
     mainLayout->addStretch();
 
-    // 2. Панель файлов (новый класс)
+    // 6. Файловые операции
     m_fileWidget = new FileControlWidget(central);
     mainLayout->addWidget(m_fileWidget);
-}
-
-void MainWindow::addMealWidget(Meal *meal)
-{
-    MealWidget *w = new MealWidget(meal, this);
-    connect(w, &MealWidget::deleteMealRequested, this, &MainWindow::onDeleteMealRequested);
-
-    connect(meal, &Meal::dishAdded, this, [meal](const QString &name, double cal) {
-        qDebug() << "[LOG] Пользователь добавил блюдо:" << name << "(" << cal << "ккал) в" << meal->name();
-    });
-    connect(meal, &Meal::dishRemoved, this, [meal](int index) {
-        qDebug() << "[LOG] Пользователь удалил блюдо из" << meal->name() << "(индекс:" << index << ")";
-    });
-    connect(meal, &Meal::cleared, this, [meal]() {
-        qDebug() << "[LOG] Пользователь очистил приём пищи:" << meal->name();
-    });
-
-    m_mealWidgets.append(w);
-    m_mealsLayout->addWidget(w);
-}
-
-void MainWindow::onMealAdded(Meal *meal) { addMealWidget(meal); }
-
-void MainWindow::onAddMealClicked()
-{
-    bool ok = false;
-    QString name = QInputDialog::getText(this, "Новый приём пищи", "Название:",
-                                         QLineEdit::Normal, "Приём пищи", &ok);
-    if (ok && !name.isEmpty()) {
-        qDebug() << "[LOG] Пользователь создал новый приём пищи:" << name;
-        m_diary->addMeal(name);
-    }
-}
-
-void MainWindow::onDeleteMealRequested(MealWidget *widget)
-{
-    Meal *meal = widget->meal();
-    qDebug() << "[LOG] Пользователь удалил приём пищи:" << meal->name();
-    m_mealWidgets.removeAll(widget);
-    widget->deleteLater();
-    m_diary->removeMeal(meal);
 }
 
 void MainWindow::onResetDay()
@@ -188,43 +126,6 @@ void MainWindow::onResetDay()
     if (answer == QMessageBox::Yes) {
         qDebug() << "[LOG] Пользователь сбросил данные за день";
         m_diary->resetDay();
-    }
-}
-
-void MainWindow::onDailyTotalChanged(double total)
-{
-    m_totalLabel->setText(QString("Итого за день: %1 ккал").arg(total));
-}
-
-void MainWindow::onNormStatusChanged(NutritionDiary::NormStatus status, double total)
-{
-    double minN = m_diary->minNorm();
-    double maxN = m_diary->maxNorm();
-
-    switch (status) {
-    case NutritionDiary::BelowNorm:
-        m_statusLabel->setText(QString("⚠ Недобор: %1 ккал").arg(minN - total, 0, 'f', 0));
-        m_statusLabel->setStyleSheet("color: orange; font-weight: bold;");
-        break;
-    case NutritionDiary::InRange:
-        m_statusLabel->setText("✓ В пределах нормы");
-        m_statusLabel->setStyleSheet("color: green; font-weight: bold;");
-        break;
-    case NutritionDiary::AboveNorm:
-        m_statusLabel->setText(QString("⚠ Перебор: %1 ккал").arg(total - maxN, 0, 'f', 0));
-        m_statusLabel->setStyleSheet("color: red; font-weight: bold;");
-        break;
-    }
-}
-
-void MainWindow::onMealRemoved(Meal *meal)
-{
-    for (int i = 0; i < m_mealWidgets.size(); ++i) {
-        if (m_mealWidgets[i]->meal() == meal) {
-            MealWidget *w = m_mealWidgets.takeAt(i);
-            w->deleteLater();
-            break;
-        }
     }
 }
 
@@ -248,12 +149,9 @@ void MainWindow::onLoadClicked()
     if (DiaryStorage::load(*m_diary)) {
         qDebug() << "[LOG] Ручная загрузка данных из файла";
         m_fileWidget->setStatus("Загружено: " + QFileInfo(DiaryStorage::defaultFilePath()).fileName());
-        // После загрузки нужно принудительно обновить интерфейс (нормы могли измениться)
-        m_normWidget->blockSignals(true);
-        // Нам пришлось бы обновлять спинбоксы внутри NormWidget.
-        // Для простоты можно просто пересоздать UI или добавить метод в NormWidget.
-        // Но так как load обычно происходит при старте, это не критично.
-        m_normWidget->blockSignals(false);
+        // После загрузки обновляем интерфейс
+        m_summaryWidget->updateTotal(m_diary->dailyTotal());
+        m_summaryWidget->updateStatus(m_diary->normStatus(), m_diary->dailyTotal(), m_diary->minNorm(), m_diary->maxNorm());
     } else {
         m_fileWidget->setStatusError("Файл не найден или повреждён.");
         QMessageBox::warning(this, "Ошибка", "Не удалось загрузить данные.");

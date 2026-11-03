@@ -8,10 +8,12 @@ TEMPLATE = app
 
 SOURCES += \
     diarystorage.cpp \
+    diarysummarywidget.cpp \
     filecontrolwidget.cpp \
     main.cpp \
     mainwindow.cpp \
     meal.cpp \
+    mealscontainerwidget.cpp \
     normwidget.cpp \
     nutritiondiary.cpp \
     mealwidget.cpp \
@@ -19,9 +21,11 @@ SOURCES += \
 
 HEADERS += \
     diarystorage.h \
+    diarysummarywidget.h \
     filecontrolwidget.h \
     mainwindow.h \
     meal.h \
+    mealscontainerwidget.h \
     normwidget.h \
     nutritiondiary.h \
     mealwidget.h \
