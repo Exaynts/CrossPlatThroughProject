@@ -1,0 +1,24 @@
+{
+    "2026-11-04": {
+        "maxNorm": 2400,
+        "meals": [
+            {
+                "dishes": [
+                ],
+                "name": "Завтрак"
+            },
+            {
+                "dishes": [
+                ],
+                "name": "Обед"
+            },
+            {
+                "dishes": [
+                ],
+                "name": "Ужин"
+            }
+        ],
+        "minNorm": 1600
+    },
+    "userName": "Jamushka"
+}

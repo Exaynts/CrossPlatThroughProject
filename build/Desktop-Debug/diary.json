@@ -3,61 +3,19 @@
     "meals": [
         {
             "dishes": [
-                {
-                    "calories": 310,
-                    "name": "Хлебушек"
-                },
-                {
-                    "calories": 300,
-                    "name": "Джем"
-                }
             ],
             "name": "Завтрак"
         },
         {
             "dishes": [
-                {
-                    "calories": 60,
-                    "name": "Конфета"
-                }
-            ],
-            "name": "Перекус утренний"
-        },
-        {
-            "dishes": [
-                {
-                    "calories": 580,
-                    "name": "Борщ  со свиниными ножками"
-                },
-                {
-                    "calories": 80,
-                    "name": "Хлеб"
-                }
             ],
             "name": "Обед"
         },
         {
             "dishes": [
-                {
-                    "calories": 380,
-                    "name": "Плов"
-                },
-                {
-                    "calories": 220,
-                    "name": "Варенье клубничное"
-                }
             ],
             "name": "Ужин"
-        },
-        {
-            "dishes": [
-                {
-                    "calories": 400,
-                    "name": "Пельмени"
-                }
-            ],
-            "name": "Ночной прием"
         }
     ],
-    "minNorm": 0
+    "minNorm": 1500
 }

@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/QtNutritionDiary_autogen.dir/AutogenUsed.txt"
+  "CMakeFiles/QtNutritionDiary_autogen.dir/ParseCache.txt"
+  "QtNutritionDiary_autogen"
+  "CMakeFiles/QtNutritionDiary.dir/QtNutritionDiary_autogen/mocs_compilation.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/QtNutritionDiary_autogen/mocs_compilation.cpp.o.d"
+  "CMakeFiles/QtNutritionDiary.dir/calculator.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/calculator.cpp.o.d"
+  "CMakeFiles/QtNutritionDiary.dir/core/diarymanager.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/core/diarymanager.cpp.o.d"
+  "CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.o.d"
+  "CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.o.d"
+  "CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.o.d"
+  "CMakeFiles/QtNutritionDiary.dir/main.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/main.cpp.o.d"
+  "CMakeFiles/QtNutritionDiary.dir/ui/mainwindow.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/ui/mainwindow.cpp.o.d"
+  "CMakeFiles/QtNutritionDiary.dir/ui/widgets/dateselectorwidget.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/ui/widgets/dateselectorwidget.cpp.o.d"
+  "CMakeFiles/QtNutritionDiary.dir/ui/widgets/diarysummarywidget.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/ui/widgets/diarysummarywidget.cpp.o.d"
+  "CMakeFiles/QtNutritionDiary.dir/ui/widgets/filecontrolwidget.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/ui/widgets/filecontrolwidget.cpp.o.d"
+  "CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealscontainerwidget.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealscontainerwidget.cpp.o.d"
+  "CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealwidget.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealwidget.cpp.o.d"
+  "CMakeFiles/QtNutritionDiary.dir/ui/widgets/normwidget.cpp.o"
+  "CMakeFiles/QtNutritionDiary.dir/ui/widgets/normwidget.cpp.o.d"
+  "QtNutritionDiary"
+  "QtNutritionDiary.pdb"
+  "QtNutritionDiary_autogen/mocs_compilation.cpp"
+  "QtNutritionDiary_autogen/timestamp"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/QtNutritionDiary.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

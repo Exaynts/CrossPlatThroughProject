@@ -1,0 +1,9 @@
+/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles/QtNutritionDiary.dir
+/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles/list_install_components.dir
+/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles/install.dir
+/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles/install/local.dir
+/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles/install/strip.dir
+/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles/QtNutritionDiary_autogen_timestamp_deps.dir
+/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles/QtNutritionDiary_autogen.dir
