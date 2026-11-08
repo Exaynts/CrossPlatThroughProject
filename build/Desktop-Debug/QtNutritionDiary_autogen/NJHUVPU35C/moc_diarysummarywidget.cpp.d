@@ -1,5 +1,6 @@
 /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/NJHUVPU35C/moc_diarysummarywidget.cpp: /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/diarysummarywidget.h \
   /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/moc_predefs.h \
+  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/dishmodel.h \
   /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/meal.h \
   /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/nutritiondiary.h \
   /usr/include/alloca.h \
@@ -285,10 +286,11 @@
   /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+  /usr/include/x86_64-linux-gnu/qt6/QtCore/QAbstractListModel \
   /usr/include/x86_64-linux-gnu/qt6/QtCore/QList \
   /usr/include/x86_64-linux-gnu/qt6/QtCore/QObject \
-  /usr/include/x86_64-linux-gnu/qt6/QtCore/QPair \
   /usr/include/x86_64-linux-gnu/qt6/QtCore/QString \
+  /usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h \
   /usr/include/x86_64-linux-gnu/qt6/QtCore/qalgorithms.h \
   /usr/include/x86_64-linux-gnu/qt6/QtCore/qanystringview.h \
   /usr/include/x86_64-linux-gnu/qt6/QtCore/qarraydata.h \

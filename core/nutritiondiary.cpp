@@ -117,17 +117,8 @@ QJsonObject NutritionDiary::toJson() const
 
     QJsonArray mealsArr;
     for (Meal *meal : m_meals) {
-        QJsonObject mealObj;
-        mealObj["name"] = meal->name();
-        QJsonArray dishesArr;
-        for (const auto &dish : meal->dishes()) {
-            QJsonObject dishObj;
-            dishObj["name"] = dish.first;
-            dishObj["calories"] = dish.second;
-            dishesArr.append(dishObj);
-        }
-        mealObj["dishes"] = dishesArr;
-        mealsArr.append(mealObj);
+        // Просто вызываем метод Meal, он сам упакует свои блюда
+        mealsArr.append(meal->toJson());
     }
     root["meals"] = mealsArr;
     return root;
@@ -135,7 +126,9 @@ QJsonObject NutritionDiary::toJson() const
 
 void NutritionDiary::fromJson(const QJsonObject &obj)
 {
+    // Очищаем старые данные
     clearAllMeals();
+
     if (obj.contains("minNorm")) setMinNorm(obj["minNorm"].toDouble(1500.0));
     if (obj.contains("maxNorm")) setMaxNorm(obj["maxNorm"].toDouble(2500.0));
 
@@ -143,10 +136,7 @@ void NutritionDiary::fromJson(const QJsonObject &obj)
     for (const QJsonValue &mealVal : mealsArr) {
         QJsonObject mealObj = mealVal.toObject();
         Meal *meal = addMeal(mealObj["name"].toString("Приём пищи"));
-        QJsonArray dishesArr = mealObj["dishes"].toArray();
-        for (const QJsonValue &dishVal : dishesArr) {
-            QJsonObject dishObj = dishVal.toObject();
-            meal->addDish(dishObj["name"].toString(), dishObj["calories"].toDouble());
-        }
+        // Просто вызываем метод Meal, он сам распакует свои блюда
+        meal->fromJson(mealObj);
     }
 }

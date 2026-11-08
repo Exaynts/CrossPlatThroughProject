@@ -24,7 +24,9 @@ bool DiaryManager::hasRecords(const QDate &date) const
 
     NutritionDiary *diary = m_diaries.value(date);
     for (Meal *meal : diary->meals()) {
-        if (meal->dishCount() > 0) return true; // Есть хоть одно блюдо
+        if (meal->model()->rowCount() > 0) {
+            return true;
+        }
     }
     return false;
 }

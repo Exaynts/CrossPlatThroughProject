@@ -181,6 +181,12 @@
 			null
 		],
 		[
+			"/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/dishmodel.h",
+			"MU",
+			"TAC5DWH4SE/moc_dishmodel.cpp",
+			null
+		],
+		[
 			"/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/meal.h",
 			"MU",
 			"TAC5DWH4SE/moc_meal.cpp",
@@ -214,6 +220,12 @@
 			"/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/diarysummarywidget.h",
 			"MU",
 			"NJHUVPU35C/moc_diarysummarywidget.cpp",
+			null
+		],
+		[
+			"/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/dishdelegate.h",
+			"MU",
+			"NJHUVPU35C/moc_dishdelegate.cpp",
 			null
 		],
 		[
@@ -314,6 +326,11 @@
 			null
 		],
 		[
+			"/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/dishmodel.cpp",
+			"MU",
+			null
+		],
+		[
 			"/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/meal.cpp",
 			"MU",
 			null
@@ -345,6 +362,11 @@
 		],
 		[
 			"/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/diarysummarywidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/dishdelegate.cpp",
 			"MU",
 			null
 		],

@@ -312,9 +312,10 @@ CMakeFiles/QtNutritionDiary.dir/core/diarymanager.cpp.o: \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/meal.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QString \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qstring.h \
+ /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/dishmodel.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QAbstractListModel \
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QList \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qlist.h \
- /usr/include/x86_64-linux-gnu/qt6/QtCore/QPair \
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qpair.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QDebug \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h

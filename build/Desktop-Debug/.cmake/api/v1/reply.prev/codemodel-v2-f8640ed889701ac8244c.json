@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-6a9f6da2e078891e5fb3.json",
+					"jsonFile" : "directory-.-Debug-d2efa0559cf9ce1273c6.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.16"
@@ -44,7 +44,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "QtNutritionDiary::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-QtNutritionDiary-Debug-9c2a7ab2e7bf364f9565.json",
+					"jsonFile" : "target-QtNutritionDiary-Debug-48e95db719cc927ca1f7.json",
 					"name" : "QtNutritionDiary",
 					"projectIndex" : 0
 				},

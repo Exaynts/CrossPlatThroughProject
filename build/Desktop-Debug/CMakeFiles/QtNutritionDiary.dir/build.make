@@ -146,10 +146,38 @@ CMakeFiles/QtNutritionDiary.dir/ui/widgets/dateselectorwidget.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/QtNutritionDiary.dir/ui/widgets/dateselectorwidget.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/dateselectorwidget.cpp -o CMakeFiles/QtNutritionDiary.dir/ui/widgets/dateselectorwidget.cpp.s
 
+CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.o: CMakeFiles/QtNutritionDiary.dir/flags.make
+CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.o: /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/dishmodel.cpp
+CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.o: CMakeFiles/QtNutritionDiary.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.o -MF CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.o.d -o CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.o -c /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/dishmodel.cpp
+
+CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/dishmodel.cpp > CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.i
+
+CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/dishmodel.cpp -o CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.s
+
+CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.o: CMakeFiles/QtNutritionDiary.dir/flags.make
+CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.o: /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/dishdelegate.cpp
+CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.o: CMakeFiles/QtNutritionDiary.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.o -MF CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.o.d -o CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.o -c /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/dishdelegate.cpp
+
+CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/dishdelegate.cpp > CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.i
+
+CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/dishdelegate.cpp -o CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.s
+
 CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.o: CMakeFiles/QtNutritionDiary.dir/flags.make
 CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.o: /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/meal.cpp
 CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.o: CMakeFiles/QtNutritionDiary.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.o -MF CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.o.d -o CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.o -c /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/meal.cpp
 
 CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.i: cmake_force
@@ -163,7 +191,7 @@ CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.s: cmake_force
 CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.o: CMakeFiles/QtNutritionDiary.dir/flags.make
 CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.o: /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/nutritiondiary.cpp
 CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.o: CMakeFiles/QtNutritionDiary.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.o -MF CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.o.d -o CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.o -c /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/nutritiondiary.cpp
 
 CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.i: cmake_force
@@ -177,7 +205,7 @@ CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.s: cmake_force
 CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.o: CMakeFiles/QtNutritionDiary.dir/flags.make
 CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.o: /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/data/diarystorage.cpp
 CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.o: CMakeFiles/QtNutritionDiary.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.o -MF CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.o.d -o CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.o -c /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/data/diarystorage.cpp
 
 CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.i: cmake_force
@@ -191,7 +219,7 @@ CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.s: cmake_force
 CMakeFiles/QtNutritionDiary.dir/ui/mainwindow.cpp.o: CMakeFiles/QtNutritionDiary.dir/flags.make
 CMakeFiles/QtNutritionDiary.dir/ui/mainwindow.cpp.o: /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/mainwindow.cpp
 CMakeFiles/QtNutritionDiary.dir/ui/mainwindow.cpp.o: CMakeFiles/QtNutritionDiary.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/QtNutritionDiary.dir/ui/mainwindow.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/QtNutritionDiary.dir/ui/mainwindow.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/QtNutritionDiary.dir/ui/mainwindow.cpp.o -MF CMakeFiles/QtNutritionDiary.dir/ui/mainwindow.cpp.o.d -o CMakeFiles/QtNutritionDiary.dir/ui/mainwindow.cpp.o -c /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/mainwindow.cpp
 
 CMakeFiles/QtNutritionDiary.dir/ui/mainwindow.cpp.i: cmake_force
@@ -205,7 +233,7 @@ CMakeFiles/QtNutritionDiary.dir/ui/mainwindow.cpp.s: cmake_force
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealwidget.cpp.o: CMakeFiles/QtNutritionDiary.dir/flags.make
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealwidget.cpp.o: /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/mealwidget.cpp
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealwidget.cpp.o: CMakeFiles/QtNutritionDiary.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealwidget.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealwidget.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealwidget.cpp.o -MF CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealwidget.cpp.o.d -o CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealwidget.cpp.o -c /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/mealwidget.cpp
 
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealwidget.cpp.i: cmake_force
@@ -219,7 +247,7 @@ CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealwidget.cpp.s: cmake_force
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/normwidget.cpp.o: CMakeFiles/QtNutritionDiary.dir/flags.make
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/normwidget.cpp.o: /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/normwidget.cpp
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/normwidget.cpp.o: CMakeFiles/QtNutritionDiary.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/QtNutritionDiary.dir/ui/widgets/normwidget.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/QtNutritionDiary.dir/ui/widgets/normwidget.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/QtNutritionDiary.dir/ui/widgets/normwidget.cpp.o -MF CMakeFiles/QtNutritionDiary.dir/ui/widgets/normwidget.cpp.o.d -o CMakeFiles/QtNutritionDiary.dir/ui/widgets/normwidget.cpp.o -c /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/normwidget.cpp
 
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/normwidget.cpp.i: cmake_force
@@ -233,7 +261,7 @@ CMakeFiles/QtNutritionDiary.dir/ui/widgets/normwidget.cpp.s: cmake_force
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/filecontrolwidget.cpp.o: CMakeFiles/QtNutritionDiary.dir/flags.make
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/filecontrolwidget.cpp.o: /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/filecontrolwidget.cpp
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/filecontrolwidget.cpp.o: CMakeFiles/QtNutritionDiary.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/QtNutritionDiary.dir/ui/widgets/filecontrolwidget.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/QtNutritionDiary.dir/ui/widgets/filecontrolwidget.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/QtNutritionDiary.dir/ui/widgets/filecontrolwidget.cpp.o -MF CMakeFiles/QtNutritionDiary.dir/ui/widgets/filecontrolwidget.cpp.o.d -o CMakeFiles/QtNutritionDiary.dir/ui/widgets/filecontrolwidget.cpp.o -c /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/filecontrolwidget.cpp
 
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/filecontrolwidget.cpp.i: cmake_force
@@ -247,7 +275,7 @@ CMakeFiles/QtNutritionDiary.dir/ui/widgets/filecontrolwidget.cpp.s: cmake_force
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/diarysummarywidget.cpp.o: CMakeFiles/QtNutritionDiary.dir/flags.make
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/diarysummarywidget.cpp.o: /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/diarysummarywidget.cpp
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/diarysummarywidget.cpp.o: CMakeFiles/QtNutritionDiary.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/QtNutritionDiary.dir/ui/widgets/diarysummarywidget.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/QtNutritionDiary.dir/ui/widgets/diarysummarywidget.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/QtNutritionDiary.dir/ui/widgets/diarysummarywidget.cpp.o -MF CMakeFiles/QtNutritionDiary.dir/ui/widgets/diarysummarywidget.cpp.o.d -o CMakeFiles/QtNutritionDiary.dir/ui/widgets/diarysummarywidget.cpp.o -c /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/diarysummarywidget.cpp
 
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/diarysummarywidget.cpp.i: cmake_force
@@ -261,7 +289,7 @@ CMakeFiles/QtNutritionDiary.dir/ui/widgets/diarysummarywidget.cpp.s: cmake_force
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealscontainerwidget.cpp.o: CMakeFiles/QtNutritionDiary.dir/flags.make
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealscontainerwidget.cpp.o: /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/mealscontainerwidget.cpp
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealscontainerwidget.cpp.o: CMakeFiles/QtNutritionDiary.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealscontainerwidget.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealscontainerwidget.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealscontainerwidget.cpp.o -MF CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealscontainerwidget.cpp.o.d -o CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealscontainerwidget.cpp.o -c /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/mealscontainerwidget.cpp
 
 CMakeFiles/QtNutritionDiary.dir/ui/widgets/mealscontainerwidget.cpp.i: cmake_force
@@ -279,6 +307,8 @@ QtNutritionDiary_OBJECTS = \
 "CMakeFiles/QtNutritionDiary.dir/calculator.cpp.o" \
 "CMakeFiles/QtNutritionDiary.dir/core/diarymanager.cpp.o" \
 "CMakeFiles/QtNutritionDiary.dir/ui/widgets/dateselectorwidget.cpp.o" \
+"CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.o" \
+"CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.o" \
 "CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.o" \
 "CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.o" \
 "CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.o" \
@@ -297,6 +327,8 @@ QtNutritionDiary: CMakeFiles/QtNutritionDiary.dir/main.cpp.o
 QtNutritionDiary: CMakeFiles/QtNutritionDiary.dir/calculator.cpp.o
 QtNutritionDiary: CMakeFiles/QtNutritionDiary.dir/core/diarymanager.cpp.o
 QtNutritionDiary: CMakeFiles/QtNutritionDiary.dir/ui/widgets/dateselectorwidget.cpp.o
+QtNutritionDiary: CMakeFiles/QtNutritionDiary.dir/core/dishmodel.cpp.o
+QtNutritionDiary: CMakeFiles/QtNutritionDiary.dir/ui/widgets/dishdelegate.cpp.o
 QtNutritionDiary: CMakeFiles/QtNutritionDiary.dir/core/meal.cpp.o
 QtNutritionDiary: CMakeFiles/QtNutritionDiary.dir/core/nutritiondiary.cpp.o
 QtNutritionDiary: CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.o
@@ -313,7 +345,7 @@ QtNutritionDiary: /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
 QtNutritionDiary: /usr/lib/x86_64-linux-gnu/libGLX.so
 QtNutritionDiary: /usr/lib/x86_64-linux-gnu/libOpenGL.so
 QtNutritionDiary: CMakeFiles/QtNutritionDiary.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable QtNutritionDiary"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable QtNutritionDiary"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/QtNutritionDiary.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

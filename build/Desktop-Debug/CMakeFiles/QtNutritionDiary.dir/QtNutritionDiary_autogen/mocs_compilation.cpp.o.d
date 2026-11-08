@@ -319,10 +319,13 @@ CMakeFiles/QtNutritionDiary.dir/QtNutritionDiary_autogen/mocs_compilation.cpp.o:
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qobject.h \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/TAC5DWH4SE/../../../../core/nutritiondiary.h \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/TAC5DWH4SE/../../../../core/meal.h \
+ /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/TAC5DWH4SE/../../../../core/dishmodel.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QAbstractListModel \
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QList \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qlist.h \
- /usr/include/x86_64-linux-gnu/qt6/QtCore/QPair \
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qpair.h \
+ /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/TAC5DWH4SE/moc_dishmodel.cpp \
+ /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/TAC5DWH4SE/../../../../core/dishmodel.h \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/TAC5DWH4SE/moc_meal.cpp \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/TAC5DWH4SE/../../../../core/meal.h \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/TAC5DWH4SE/moc_nutritiondiary.cpp \
@@ -380,6 +383,22 @@ CMakeFiles/QtNutritionDiary.dir/QtNutritionDiary_autogen/mocs_compilation.cpp.o:
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QList \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/NJHUVPU35C/moc_diarysummarywidget.cpp \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/NJHUVPU35C/../../../../ui/widgets/diarysummarywidget.h \
+ /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/NJHUVPU35C/moc_dishdelegate.cpp \
+ /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/NJHUVPU35C/../../../../ui/widgets/dishdelegate.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QStyledItemDelegate \
+ /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstyleditemdelegate.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qabstractitemdelegate.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstyleoption.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qabstractspinbox.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtGui/qvalidator.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qslider.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qabstractslider.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstyle.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtabbar.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qrubberband.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qframe.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/NJHUVPU35C/moc_filecontrolwidget.cpp \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/NJHUVPU35C/../../../../ui/widgets/filecontrolwidget.h \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/NJHUVPU35C/moc_mealscontainerwidget.cpp \
@@ -388,7 +407,6 @@ CMakeFiles/QtNutritionDiary.dir/QtNutritionDiary_autogen/mocs_compilation.cpp.o:
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/NJHUVPU35C/../../../../ui/widgets/mealwidget.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QGroupBox \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgroupbox.h \
- /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qframe.h \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/NJHUVPU35C/moc_normwidget.cpp \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/build/Desktop-Debug/QtNutritionDiary_autogen/NJHUVPU35C/../../../../ui/widgets/normwidget.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QSignalBlocker

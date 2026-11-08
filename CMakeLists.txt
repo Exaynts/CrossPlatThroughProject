@@ -21,12 +21,15 @@ qt_add_executable(QtNutritionDiary
     core/diarymanager.h
     core/diarymanager.cpp
     ui/widgets/dateselectorwidget.h ui/widgets/dateselectorwidget.cpp
+    core/dishmodel.h core/dishmodel.cpp
+    ui/widgets/dishdelegate.h ui/widgets/dishdelegate.cpp
 )
 
 target_sources(QtNutritionDiary PRIVATE
     core/diarymanager.cpp core/diarymanager.h
     core/meal.cpp core/meal.h
     core/nutritiondiary.cpp core/nutritiondiary.h
+    core/dishmodel.cpp core/dishmodel.h
     
     data/diarystorage.cpp data/diarystorage.h
     
@@ -38,6 +41,7 @@ target_sources(QtNutritionDiary PRIVATE
     ui/widgets/diarysummarywidget.cpp ui/widgets/diarysummarywidget.h
     ui/widgets/mealscontainerwidget.cpp ui/widgets/mealscontainerwidget.h
     ui/widgets/dateselectorwidget.cpp ui/widgets/dateselectorwidget.h
+    ui/widgets/dishdelegate.cpp ui/widgets/dishdelegate.h
 )
 
 target_include_directories(QtNutritionDiary PRIVATE

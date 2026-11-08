@@ -1,101 +1,127 @@
 #include "mealwidget.h"
 #include "meal.h"
+#include "dishmodel.h"
+#include "dishdelegate.h"
+
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QFormLayout>
 #include <QLineEdit>
-#include <QSpinBox>
-#include <QListWidget>
+#include <QDoubleSpinBox>
+#include <QListView>
 #include <QPushButton>
 #include <QLabel>
 #include <QMessageBox>
+#include <QItemSelectionModel>
 
 MealWidget::MealWidget(Meal *meal, QWidget *parent)
     : QGroupBox(meal->name(), parent)
     , m_meal(meal)
 {
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
-    // Форма ввода блюда
-    QFormLayout *form = new QFormLayout();
+    // 1. Строка ввода нового блюда
+    QHBoxLayout *inputLayout = new QHBoxLayout();
     m_nameEdit = new QLineEdit(this);
     m_nameEdit->setPlaceholderText("Название блюда");
-    m_caloriesSpin = new QSpinBox(this);
+
+    m_caloriesSpin = new QDoubleSpinBox(this);
     m_caloriesSpin->setRange(0, 5000);
     m_caloriesSpin->setSuffix(" ккал");
-    form->addRow("Блюдо:", m_nameEdit.data());
-    form->addRow("Калории:", m_caloriesSpin.data());
-    layout->addLayout(form);
 
-    // Кнопки работы с блюдами
+    m_addBtn = new QPushButton("Добавить", this);
+
+    inputLayout->addWidget(m_nameEdit, 1); // Поле имени растягивается
+    inputLayout->addWidget(m_caloriesSpin);
+    inputLayout->addWidget(m_addBtn);
+    mainLayout->addLayout(inputLayout);
+
+    // 2. Список блюд (Model-View)
+    m_view = new QListView(this);
+    m_view->setModel(m_meal->model()); // Привязываем модель
+    m_view->setItemDelegate(new DishDelegate(m_view)); // Вешаем делегат
+    m_view->setSelectionMode(QAbstractItemView::SingleSelection);
+    m_view->setEditTriggers(QAbstractItemView::DoubleClicked); // Редактирование по двойному клику
+    mainLayout->addWidget(m_view);
+
+    // 3. Панель кнопок управления (Удалить, Очистить)
     QHBoxLayout *btnLayout = new QHBoxLayout();
-    QPushButton *addBtn = new QPushButton("Добавить", this);
-    QPushButton *delDishBtn = new QPushButton("Удалить блюдо", this);
-    btnLayout->addWidget(addBtn);
-    btnLayout->addWidget(delDishBtn);
-    layout->addLayout(btnLayout);
+    m_removeBtn = new QPushButton("Удалить блюдо", this);
+    m_clearBtn = new QPushButton("Очистить", this);
 
-    // Список блюд
-    m_list = new QListWidget(this);
-    layout->addWidget(m_list.data());
+    m_removeBtn->setEnabled(false); // Изначально ничего не выделено
 
-    // Итог по приёму пищи
+    btnLayout->addWidget(m_removeBtn);
+    btnLayout->addWidget(m_clearBtn);
+    btnLayout->addStretch(); // Прижимаем влево
+    mainLayout->addLayout(btnLayout);
+
+    // 4. Итог по приему пищи
     m_totalLabel = new QLabel("Итого: 0 ккал", this);
-    layout->addWidget(m_totalLabel.data());
+    mainLayout->addWidget(m_totalLabel);
 
-    // Кнопка удаления всего приёма пищи
-    QPushButton *delMealBtn = new QPushButton("Удалить приём пищи", this);
-    delMealBtn->setStyleSheet("color: darkred;");
-    layout->addWidget(delMealBtn);
+    // 5. Кнопка удаления всего приема пищи
+    QPushButton *deleteMealBtn = new QPushButton("Удалить приём пищи", this);
+    deleteMealBtn->setStyleSheet("color: darkred;");
+    mainLayout->addWidget(deleteMealBtn);
 
-    // Связки
-    connect(addBtn, &QPushButton::clicked, this, &MealWidget::onAddDish);
-    connect(delDishBtn, &QPushButton::clicked, this, &MealWidget::onDeleteDish);
-    connect(delMealBtn, &QPushButton::clicked, this, &MealWidget::onDeleteMealClicked);
+    // --- Связки ---
+    connect(m_addBtn, &QPushButton::clicked, this, &MealWidget::onAddDish);
+    connect(m_removeBtn, &QPushButton::clicked, this, &MealWidget::onRemoveDish);
+    connect(m_clearBtn, &QPushButton::clicked, this, &MealWidget::onClearDishes);
+    connect(deleteMealBtn, &QPushButton::clicked, this, &MealWidget::onDeleteMealClicked);
 
-    connect(m_meal, &Meal::dishAdded, this, [this](const QString &, double) { refreshList(); });
-    connect(m_meal, &Meal::dishRemoved, this, [this](int) { refreshList(); });
-    connect(m_meal, &Meal::cleared, this, [this]() { refreshList(); });
+    // Обновление состояния кнопки "Удалить" при изменении выделения
+    connect(m_view->selectionModel(), &QItemSelectionModel::selectionChanged,
+            this, &MealWidget::onSelectionChanged);
+
+    // Обновление итога при изменении данных в модели
     connect(m_meal, &Meal::totalChanged, this, &MealWidget::updateTotal);
 
-    // Двойной клик по блюду — быстрое удаление
-    connect(m_list.data(), &QListWidget::itemDoubleClicked, this, &MealWidget::onDeleteDish);
-
-    refreshList();
+    // Начальное обновление
+    updateTotal(m_meal->totalCalories());
 }
 
 void MealWidget::onAddDish()
 {
     QString name = m_nameEdit->text().trimmed();
-    int cal = m_caloriesSpin->value();
+    double calories = m_caloriesSpin->value();
+
     if (name.isEmpty()) {
         QMessageBox::warning(this, "Ошибка", "Введите название блюда!");
         return;
     }
-    if (cal <= 0) {
+    if (calories <= 0) {
         QMessageBox::warning(this, "Ошибка", "Калорийность должна быть больше 0!");
         return;
     }
-    m_meal->addDish(name, cal);
+
+    // Добавляем через модель (она сама испустит сигналы для обновления view)
+    m_meal->addDish(name, calories);
+
     m_nameEdit->clear();
     m_caloriesSpin->setValue(0);
     m_nameEdit->setFocus();
 }
 
-void MealWidget::onDeleteDish()
+void MealWidget::onRemoveDish()
 {
-    int row = m_list->currentRow();
-    if (row < 0) {
-        QMessageBox::information(this, "Удаление",
-                                 "Выберите блюдо в списке для удаления.");
-        return;
-    }
-    QString dishName = m_meal->dishes().at(row).first;
-    auto answer = QMessageBox::question(this, "Удаление блюда",
-                                        QString("Удалить блюдо \"%1\"?").arg(dishName),
+    QModelIndex current = m_view->currentIndex();
+    if (!current.isValid()) return;
+
+    // Удаляем строку из модели
+    m_meal->removeDish(current.row());
+}
+
+void MealWidget::onClearDishes()
+{
+    if (m_meal->model()->rowCount() == 0) return;
+
+    auto answer = QMessageBox::question(this, "Очистка",
+                                        QString("Удалить все блюда из приёма пищи \"%1\"?").arg(m_meal->name()),
                                         QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+
     if (answer == QMessageBox::Yes) {
-        m_meal->removeDish(row);
+        m_meal->clear();
     }
 }
 
@@ -109,12 +135,11 @@ void MealWidget::onDeleteMealClicked()
     }
 }
 
-void MealWidget::refreshList()
+void MealWidget::onSelectionChanged()
 {
-    m_list->clear();
-    for (const auto &dish : m_meal->dishes()) {
-        m_list->addItem(QString("%1 — %2 ккал").arg(dish.first).arg(dish.second));
-    }
+    // Кнопка "Удалить блюдо" активна только если что-то выделено
+    bool hasSelection = m_view->currentIndex().isValid();
+    m_removeBtn->setEnabled(hasSelection);
 }
 
 void MealWidget::updateTotal(double total)

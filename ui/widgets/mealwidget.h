@@ -5,9 +5,10 @@
 #include <QPointer>
 
 class QLineEdit;
-class QSpinBox;
-class QListWidget;
+class QDoubleSpinBox;
+class QListView;
 class QLabel;
+class QPushButton;
 class Meal;
 
 class MealWidget : public QGroupBox
@@ -22,17 +23,23 @@ signals:
 
 private slots:
     void onAddDish();
-    void onDeleteDish();
+    void onRemoveDish();
+    void onClearDishes();
     void onDeleteMealClicked();
-    void refreshList();
+    void onSelectionChanged();
     void updateTotal(double total);
 
 private:
     Meal *m_meal;
+
     QPointer<QLineEdit> m_nameEdit;
-    QPointer<QSpinBox> m_caloriesSpin;
-    QPointer<QListWidget> m_list;
+    QPointer<QDoubleSpinBox> m_caloriesSpin;
+    QPointer<QListView> m_view;
     QPointer<QLabel> m_totalLabel;
+
+    QPointer<QPushButton> m_addBtn;
+    QPointer<QPushButton> m_removeBtn;
+    QPointer<QPushButton> m_clearBtn;
 };
 
 #endif // MEALWIDGET_H

@@ -1,5 +1,6 @@
 #include "mealscontainerwidget.h"
 #include "nutritiondiary.h"
+#include "dishmodel.h"
 #include "meal.h"
 #include "mealwidget.h"
 #include <QVBoxLayout>
@@ -50,14 +51,26 @@ void MealsContainerWidget::onMealAdded(Meal *meal)
     MealWidget *w = new MealWidget(meal, this);
     connect(w, &MealWidget::deleteMealRequested, this, &MealsContainerWidget::onDeleteMealRequested);
 
-    // Логирование действий с блюдами
-    connect(meal, &Meal::dishAdded, this, [meal](const QString &name, double cal) {
-        qDebug() << "[LOG] Пользователь добавил блюдо:" << name << "(" << cal << "ккал) в" << meal->name();
+    // Логирование действий с блюдами теперь идет через сигналы модели
+    DishModel *model = meal->model();
+
+    // Сигнал добавления строк (блюд)
+    connect(model, &QAbstractItemModel::rowsInserted, this, [meal, model](const QModelIndex &, int first, int last) {
+        for (int i = first; i <= last; ++i) {
+            QModelIndex idx = model->index(i, 0);
+            QString name = model->data(idx, DishModel::NameRole).toString();
+            double cal = model->data(idx, DishModel::CaloriesRole).toDouble();
+            qDebug() << "[LOG] Пользователь добавил блюдо:" << name << "(" << cal << "ккал) в" << meal->name();
+        }
     });
-    connect(meal, &Meal::dishRemoved, this, [meal](int index) {
-        qDebug() << "[LOG] Пользователь удалил блюдо из" << meal->name() << "(индекс:" << index << ")";
+
+    // Сигнал удаления строк (блюд)
+    connect(model, &QAbstractItemModel::rowsRemoved, this, [meal](const QModelIndex &, int first, int /*last*/) {
+        qDebug() << "[LOG] Пользователь удалил блюдо из" << meal->name() << "(строка:" << first << ")";
     });
-    connect(meal, &Meal::cleared, this, [meal]() {
+
+    // Сигнал полной очистки модели
+    connect(model, &QAbstractItemModel::modelReset, this, [meal]() {
         qDebug() << "[LOG] Пользователь очистил приём пищи:" << meal->name();
     });
 

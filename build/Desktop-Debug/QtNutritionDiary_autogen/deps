@@ -8,6 +8,8 @@ QtNutritionDiary_autogen/timestamp: \
 	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/calculator.h \
 	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/diarymanager.cpp \
 	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/diarymanager.h \
+	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/dishmodel.cpp \
+	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/dishmodel.h \
 	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/meal.cpp \
 	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/meal.h \
 	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/nutritiondiary.cpp \
@@ -21,6 +23,8 @@ QtNutritionDiary_autogen/timestamp: \
 	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/dateselectorwidget.h \
 	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/diarysummarywidget.cpp \
 	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/diarysummarywidget.h \
+	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/dishdelegate.cpp \
+	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/dishdelegate.h \
 	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/filecontrolwidget.cpp \
 	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/filecontrolwidget.h \
 	/home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/ui/widgets/mealscontainerwidget.cpp \
@@ -312,15 +316,16 @@ QtNutritionDiary_autogen/timestamp: \
 	/usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
 	/usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
 	/usr/include/x86_64-linux-gnu/gnu/stubs.h \
+	/usr/include/x86_64-linux-gnu/qt6/QtCore/QAbstractListModel \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/QDate \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/QList \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/QMap \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/QObject \
-	/usr/include/x86_64-linux-gnu/qt6/QtCore/QPair \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/QPointer \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/QSignalBlocker \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/QString \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/QTimer \
+	/usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/qalgorithms.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/qanystringview.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/qarraydata.h \
@@ -379,6 +384,7 @@ QtNutritionDiary_autogen/timestamp: \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/qprocessordetection.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/qrect.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/qrefcount.h \
+	/usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/qscopedpointer.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/qscopeguard.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtCore/qset.h \
@@ -433,14 +439,25 @@ QtNutritionDiary_autogen/timestamp: \
 	/usr/include/x86_64-linux-gnu/qt6/QtGui/qtguiexports.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtGui/qtguiglobal.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtGui/qtransform.h \
+	/usr/include/x86_64-linux-gnu/qt6/QtGui/qvalidator.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtGui/qwindowdefs.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/QGroupBox \
 	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/QMainWindow \
+	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/QStyledItemDelegate \
 	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/QWidget \
+	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qabstractitemdelegate.h \
+	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qabstractslider.h \
+	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qabstractspinbox.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qframe.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgroupbox.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qmainwindow.h \
+	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qrubberband.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qsizepolicy.h \
+	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qslider.h \
+	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstyle.h \
+	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstyleditemdelegate.h \
+	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstyleoption.h \
+	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtabbar.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtabwidget.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtwidgets-config.h \
 	/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtwidgetsexports.h \

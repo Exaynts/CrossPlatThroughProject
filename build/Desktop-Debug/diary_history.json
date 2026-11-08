@@ -20,5 +20,67 @@
         ],
         "minNorm": 1600
     },
+    "2026-11-07": {
+        "maxNorm": 2500,
+        "meals": [
+            {
+                "dishes": [
+                    {
+                        "calories": 380,
+                        "name": "Булочка с джемом"
+                    },
+                    {
+                        "calories": 840,
+                        "name": "Бутерброды с салом"
+                    }
+                ],
+                "name": "Завтрак"
+            },
+            {
+                "dishes": [
+                ],
+                "name": "Обед"
+            },
+            {
+                "dishes": [
+                    {
+                        "calories": 480,
+                        "name": "Каша гречневая"
+                    }
+                ],
+                "name": "Ужин"
+            }
+        ],
+        "minNorm": 1500
+    },
+    "2026-11-08": {
+        "maxNorm": 2500,
+        "meals": [
+            {
+                "dishes": [
+                    {
+                        "calories": 220,
+                        "name": "Омлет"
+                    }
+                ],
+                "name": "Завтрак"
+            },
+            {
+                "dishes": [
+                    {
+                        "calories": 680,
+                        "name": "Борщ с курицей"
+                    }
+                ],
+                "name": "Обед"
+            },
+            {
+                "dishes": [
+                ],
+                "name": "Ужин"
+            }
+        ],
+        "minNorm": 1500
+    },
     "userName": "Jamushka"
 }

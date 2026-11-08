@@ -313,10 +313,11 @@ CMakeFiles/QtNutritionDiary.dir/data/diarystorage.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qobject.h \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/nutritiondiary.h \
  /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/meal.h \
+ /home/Jamushka/Projects/CrossPlatProg/CrossPlatThroughProject/core/dishmodel.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QAbstractListModel \
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QList \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qlist.h \
- /usr/include/x86_64-linux-gnu/qt6/QtCore/QPair \
- /usr/include/x86_64-linux-gnu/qt6/QtCore/qpair.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QFile \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qfile.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qfiledevice.h \
